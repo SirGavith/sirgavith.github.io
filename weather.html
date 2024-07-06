@@ -38,17 +38,28 @@
 </style>
 
 <script>
-    function startTime() {
+
+    function onInitialized() {
+        let clock = document.getElementById("clock");
+        setInterval(refreshTime, 1000, clock);
+        setInterval(refreshWeather, 8.64e7);
+    }
+
+    function refreshTime(clock) {
         const today = new Date();
         let h = today.getHours();
         if (h > 12) h -= 12;
         let m = String(today.getMinutes()).padStart(2, '0');
-        document.getElementById("clock").innerHTML = h + ":" + m;
-        setTimeout(startTime, 1000);
+        clock.innerHTML = h + ":" + m;
+    }
+
+    function refreshWeather() {
+        let weather = document.getElementById("weather");
+        weather.src = weather.src;
     }
 </script>
 
-<body onload="startTime()">
+<body onload="refreshTime()">
     <div id="clockHolder">
         <div id="clock">
             00:00
